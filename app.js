@@ -13,7 +13,7 @@ const {categories,references,videos}=window.CINEMA;
 const aiDemo=d=>/ИИ|Melies|GrokCine|Higgsfield|Риачи|AI Camera/i.test(d.label||'')||/aicameramovements|fashion-camera-movements|melies.co|grokcine|higgsfield/.test(d.page);
 const cards=categories.flatMap(category=>category.techniques.map(tech=>{
  const ref=references[tech.refId]||{},examples=[],seen=new Set();
- for(const d of ref.demos||[]) { const clip=videos[d.page];if(clip&&!seen.has(clip.src)){seen.add(clip.src);examples.push({...d,...clip,type:'video',ai:aiDemo(d)});} }
+ for(const d of [...(ref.demos||[])].sort((a,b)=>Number(aiDemo(a))-Number(aiDemo(b)))) { const clip=videos[d.page];if(clip&&!seen.has(clip.src)){seen.add(clip.src);examples.push({...d,...clip,type:'video',ai:aiDemo(d)});} }
  for(const f of ref.frames||[]) { if(!seen.has(f.id)){seen.add(f.id);examples.push({...f,type:'photo',src:`frames/${f.id}.webp`,poster:`frames/${f.id}.webp`,label:f.title||f.collection,caption:f.caption||ref.caption,ai:!!f.ai});} }
  for(const d of ref.demos||[]) for(const f of (videos[d.page]?[]:d.frames||[])) {if(!seen.has(f.id)){seen.add(f.id);examples.push({...f,type:'photo',src:`frames/${f.id}.webp`,poster:`frames/${f.id}.webp`,label:f.title||d.label,caption:d.caption,ai:aiDemo(d)});}}
  return {...tech,category,ref,examples,search:norm([tech.name,tech.nameEn,tech.desc,tech.usage,tech.films,tech.aliases,tech.searchDetails,category.title,ref.caption,...examples.map(e=>[e.label,e.caption,e.credit].join(' '))].join(' '))};

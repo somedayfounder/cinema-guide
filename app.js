@@ -14,7 +14,7 @@ const cards=categories.flatMap(category=>category.techniques.map(tech=>{
  const ref=references[tech.refId]||{},examples=[],seen=new Set();
  for(const d of ref.demos||[]) { const clip=videos[d.page];if(clip&&!seen.has(clip.src)){seen.add(clip.src);examples.push({...d,...clip,type:'video',ai:aiDemo(d)});} }
  for(const f of ref.frames||[]) { if(!seen.has(f.id)){seen.add(f.id);examples.push({...f,type:'photo',src:`frames/${f.id}.webp`,poster:`frames/${f.id}.webp`,label:f.title||f.collection,caption:ref.caption,ai:false});} }
- for(const d of ref.demos||[]) for(const f of d.frames||[]) {if(!seen.has(f.id)){seen.add(f.id);examples.push({...f,type:'photo',src:`frames/${f.id}.webp`,poster:`frames/${f.id}.webp`,label:f.title||d.label,caption:d.caption,ai:aiDemo(d)});}}
+ for(const d of ref.demos||[]) for(const f of (videos[d.page]?[]:d.frames||[])) {if(!seen.has(f.id)){seen.add(f.id);examples.push({...f,type:'photo',src:`frames/${f.id}.webp`,poster:`frames/${f.id}.webp`,label:f.title||d.label,caption:d.caption,ai:aiDemo(d)});}}
  return {...tech,category,ref,examples,search:norm([tech.name,tech.nameEn,tech.desc,tech.usage,tech.films,tech.aliases,tech.searchDetails,category.title,ref.caption,...examples.map(e=>e.label)].join(' '))};
 }));
 const byId=new Map(cards.map(c=>[String(c.refId),c]));

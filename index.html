@@ -17,7 +17,7 @@
   <section class="intro" aria-labelledby="pageTitle">
     <div><p class="eyebrow">Личная библиотека визуальных приёмов</p><h1 id="pageTitle">Найти свой кадр</h1>
     <p class="lede">Смотри, как устроен приём, и пробуй в своей съёмке.</p></div>
-    <div class="intro-note"><strong>537 приёмов · 232 видео</strong><span>Наведи на карточку, чтобы оживить пример.<br>Открой её для разбора и практики.</span></div>
+    <div class="intro-note"><strong>537 приёмов · 373 видео</strong><span>Наведи на карточку, чтобы оживить пример.<br>Открой её, чтобы сравнить примеры в галерее.</span></div>
   </section>
   <section class="disciplines" aria-labelledby="disciplineTitle">
     <div class="section-top"><div><h2 id="disciplineTitle">Что изучаем</h2><p id="selectionSummary">Все разделы</p></div><button class="text-btn" id="clearCategories" type="button">Сбросить выбор</button></div>
@@ -33,7 +33,7 @@
     <div class="filterbar">
       <label class="search-field"><span class="sr-only">Поиск по приёму, фильму или описанию</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input type="search" id="search" placeholder="Приём, фильм или настроение…" autocomplete="off"><kbd aria-hidden="true">/</kbd></label>
       <label class="select-field">Пример <select id="source"><option value="all">Любой</option><option value="film">Кино и съёмка</option><option value="ai">ИИ-демонстрация</option></select></label>
-      <label class="select-field">Порядок <select id="sort"><option value="catalog">По разделам</option><option value="name">По алфавиту</option><option value="video">Сначала видео</option></select></label>
+      <label class="select-field">Порядок <select id="sort"><option value="catalog">По разделам</option><option value="name">По алфавиту</option><option value="video">Сначала видео</option><option value="gallery">Больше примеров</option></select></label>
       <button class="text-btn" id="resetFilters" type="button">Сбросить фильтры</button>
     </div>
     <div id="activeFilters" class="active-filters"></div>
@@ -54,13 +54,13 @@
 <dialog class="about-dialog" id="aboutDialog" aria-labelledby="aboutTitle">
   <div class="dialog-toolbar"><button class="close-btn" id="closeAbout" type="button" aria-label="Закрыть">×</button></div>
   <div class="about-copy"><p class="eyebrow">О подборке</p><h2 id="aboutTitle">Смотреть и разбирать</h2>
-  <p>Здесь собраны 537 приёмов кино, рекламы и телевидения, 232 видео и опубликованные кадры. Видеодемонстрации, созданные с помощью ИИ, отмечены в карточках и плеере.</p>
+  <p>Здесь собраны 537 приёмов кино, рекламы и телевидения, 373 видео и опубликованные кадры. Видеодемонстрации, созданные с помощью ИИ, отмечены в карточках и плеере.</p>
   <p>«Кино и съёмка» включает фрагменты фильмов, фотографии и учебные реконструкции. Иногда в одной карточке есть и кинокадр, и ИИ-видео. Переключи тип примера в фильтре, чтобы выбрать нужный.</p>
   <p>Пояснения к конкретному примеру находятся рядом с источником. Упражнения и замечания для практики составлены для этого справочника. Фильмы в разделе «Где искать» — ориентиры из исходного гайда.</p>
   <p>Права на сторонние материалы принадлежат их авторам. Открытые лицензии и атрибуция указаны у соответствующих примеров. Видеофрагменты сокращены и перекодированы.</p>
   <p>Наведение запускает видео без звука. На телефоне касание открывает разбор. Внутри можно включить звук и выбрать другой пример. Для просмотра большого кадра нажми на него.</p></div>
 </dialog>
-<dialog class="image-dialog" id="imageDialog" aria-label="Кадр крупнее"><button class="close-btn" id="closeImage" type="button" aria-label="Закрыть изображение">×</button><img id="largeImage" alt=""><p id="imageCaption"></p></dialog>
+<dialog class="image-dialog" id="imageDialog" aria-label="Кадр крупнее"><div class="image-toolbar"><button type="button" class="text-btn" id="previousImage" aria-label="Предыдущий кадр">←</button><span id="imagePosition"></span><button type="button" class="text-btn" id="nextImage" aria-label="Следующий кадр">→</button><button class="close-btn" id="closeImage" type="button" aria-label="Закрыть изображение">×</button></div><img id="largeImage" alt=""><p id="imageCaption"></p></dialog>
 <div class="toast" id="toast" role="status" hidden></div>
 <noscript><p class="wrap">Для поиска, видеопримеров и открытия карточек нужен JavaScript.</p></noscript>
 </body>

@@ -140,5 +140,18 @@ document.addEventListener('keydown',event=>{
 });
 document.addEventListener('visibilitychange',()=>{if(document.hidden){pausePreviews();$('#exampleStage video')?.pause();}});
 const legacySection=new URLSearchParams(location.search).get('sections')?.split(',')[0];if(!location.hash&&categories.some(c=>c.id===legacySection))history.replaceState(null,'',location.pathname+location.search+'#section-'+legacySection);
-readFilters();render();if(routeId())openDetail(routeId(),false,true);requestAnimationFrame(jumpToSection);
+readFilters();render();
+const initialId=routeId();
+if(initialId&&byId.has(initialId))openDetail(initialId,false,true);
+else if(matchMedia('(min-width: 761px)').matches){
+ const section=/^#section-([a-z]+)$/.exec(location.hash)?.[1];
+ const first=(section?document.querySelector(`#section-${section} .card-open`):null)||$('.card-open');
+ if(first){
+  const id=first.dataset.open,p=new URLSearchParams(location.search);p.delete('card');
+  if(section)p.set('card',id);
+  history.replaceState(null,'',location.pathname+(p.size?'?'+p:'')+(section?location.hash:'#tech-'+id));renderedSearch=location.search;
+  openDetail(id,false,true);
+ }
+}
+requestAnimationFrame(jumpToSection);
 })();

@@ -131,3 +131,10 @@ dialog{padding:0;border:1px solid var(--line);border-radius:20px;background:var(
 @media(min-width:1380px){.cards,.detail-open .cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(min-width:1600px){.cards,.detail-open .cards{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media(min-width:1100px) and (max-height:560px){.library-layout,.detail-open .library-layout{grid-template-columns:270px minmax(0,1fr)}}
+
+/* Centre the complete workspace, keeping the catalogue and detail pane adjacent. */
+@media(min-width:761px){
+ :root{--workspace-edge:max(24px,calc((100vw - 1924px)/2))}
+ .library-layout,.detail-open .library-layout,.site-footer,.detail-open .site-footer{width:calc(100vw - var(--workspace-edge)*2 - var(--detail-width) - 24px);max-width:none;margin-left:var(--workspace-edge);margin-right:0}
+ .tech-dialog{right:var(--workspace-edge)}
+}

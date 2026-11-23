@@ -31,15 +31,9 @@ function syncURL(){const p=new URLSearchParams();if(state.mode!=='all')p.set('mo
 function updateCurrentCard(){ $$('[data-open]').forEach(b=>b.setAttribute('aria-expanded',!!current&&String(current.refId)===b.dataset.open)); }
 function setPanelLayout(){
  const open=dialog.open,compact=matchMedia('(max-width: 760px)').matches;
- const changing=document.body.classList.contains('detail-open')!==open;
- const selected=current?document.querySelector(`[data-open="${current.refId}"]`):null;
- const visible=el=>{const r=el.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight;};
- const anchor=changing&&!compact?(selected&&visible(selected)?selected:$$('.card-open').find(visible)):null;
- const before=anchor?.getBoundingClientRect().top;
  document.body.classList.toggle('detail-open',open);
  $('.library-layout').inert=open&&compact;$('.site-footer').inert=open&&compact;
  dialog.setAttribute('aria-modal',open&&compact?'true':'false');
- if(anchor)window.scrollBy(0,anchor.getBoundingClientRect().top-before);
  updateCurrentCard();
 }
 function notify(s){clearTimeout(toastTimer);$('#toast').textContent=s;$('#toast').hidden=false;toastTimer=setTimeout(()=>$('#toast').hidden=true,2400);}

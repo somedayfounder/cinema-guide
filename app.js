@@ -30,7 +30,7 @@ function readFilters(){const p=new URLSearchParams(location.search);state.mode=[
 function syncURL(){const p=new URLSearchParams();if(state.mode!=='all')p.set('mode',state.mode);history.replaceState(null,'',location.pathname+(p.size?'?'+p:'')+location.hash);renderedSearch=location.search;}
 function updateCurrentCard(){ $$('[data-open]').forEach(b=>b.setAttribute('aria-expanded',!!current&&String(current.refId)===b.dataset.open)); }
 function setPanelLayout(){
- const open=dialog.open,compact=matchMedia('(max-width: 980px)').matches;
+ const open=dialog.open,compact=matchMedia('(max-width: 760px)').matches;
  const changing=document.body.classList.contains('detail-open')!==open;
  const selected=current?document.querySelector(`[data-open="${current.refId}"]`):null;
  const visible=el=>{const r=el.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight;};
@@ -47,11 +47,9 @@ function toggleSaved(id){id=String(id);saved.has(id)?saved.delete(id):saved.add(
 function updateSaved(){ $('#savedCount').textContent=saved.size;$$('[data-save]').forEach(b=>{const yes=saved.has(b.dataset.save);b.setAttribute('aria-pressed',yes);b.setAttribute('aria-label',yes?'Убрать из избранного':'В избранное');});if(current){$('#saveDetail').textContent=saved.has(String(current.refId))?'В избранном · убрать':'Сохранить в избранное';$('#saveDetail').setAttribute('aria-pressed',saved.has(String(current.refId)));}}
 const orderedCategories=groups.flatMap(([,ids])=>ids).map(id=>categories.find(c=>c.id===id)).filter(Boolean);
 function renderNavigation(result){
- const counts=new Map(orderedCategories.map(c=>[c.id,result.filter(t=>t.category.id===c.id).length]));
- $('#sectionNavigation').innerHTML=groups.map(([label,ids])=>{
-  const visible=ids.filter(id=>counts.get(id)>0);
-  return visible.length?`<div class="nav-group"><h3>${esc(label)}</h3>${visible.map(id=>`<a href="#section-${id}" data-section="${id}"><span>${names[id]}</span><span class="section-count">${counts.get(id)}</span></a>`).join('')}</div>`:'';
- }).join('')||'<p class="nav-empty">Нет разделов по этому запросу</p>';
+ const entries=orderedCategories.map(category=>({category,count:result.filter(c=>c.category.id===category.id).length})).filter(x=>x.count);
+ $('#sectionNavigation').style.setProperty('--nav-count',entries.length||1);
+ $('#sectionNavigation').innerHTML=entries.map(({category:c,count})=>`<a href="#section-${c.id}" data-section="${c.id}"><span>${names[c.id]}</span></a>`).join('')||'<p class="nav-empty">Нет разделов в этом режиме</p>';
  updateActiveSection();
 }
 function updateActiveSection(){
@@ -120,7 +118,7 @@ document.addEventListener('keydown',event=>{if($('#imageDialog').open&&['ArrowLe
 document.addEventListener('keydown',event=>{
  if(!dialog.open||document.querySelector('dialog:modal'))return;
  if(event.key==='Escape'){event.preventDefault();closeDetail();return;}
- if(event.key==='Tab'&&matchMedia('(max-width: 980px)').matches){
+ if(event.key==='Tab'&&matchMedia('(max-width: 760px)').matches){
   const focusable=[...dialog.querySelectorAll('button,a[href],video[controls],summary,[tabindex="0"]')].filter(el=>!el.disabled&&el.getClientRects().length);
   const first=focusable[0],last=focusable.at(-1);
   if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus();}

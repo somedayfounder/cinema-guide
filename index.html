@@ -6,10 +6,10 @@
 <meta name="color-scheme" content="light">
 <meta name="description" content="537 приёмов кино, рекламы и телевидения. Галереи видеопримеров, признаки приёмов и объяснения различий между ними.">
 <title>Кинематографический язык — визуальный справочник</title>
-<link rel="stylesheet" href="styles.css?v=sections-20261123">
-<script defer src="data.js?v=sections-20261123"></script>
-<script defer src="details.js?v=sections-20261123"></script>
-<script defer src="app.js?v=sections-20261123"></script>
+<link rel="stylesheet" href="styles.css?v=panel-20261123">
+<script defer src="data.js?v=panel-20261123"></script>
+<script defer src="details.js?v=panel-20261123"></script>
+<script defer src="app.js?v=panel-20261123"></script>
 </head>
 <body>
 
@@ -20,24 +20,13 @@
     <nav id="sectionNavigation" class="section-navigation" aria-label="Разделы справочника"></nav>
   </aside>
 <main class="page-content">
-  <section class="intro" aria-labelledby="pageTitle">
-    <div><p class="eyebrow">Личная библиотека визуальных приёмов</p><h1 id="pageTitle">Найти свой кадр</h1>
-    <p class="lede">Смотри, как устроен приём, и пробуй в своей съёмке.</p></div>
-    <div class="intro-note"><strong>537 приёмов · 373 видео</strong><span>Наведи на карточку, чтобы оживить пример.<br>Открой её, чтобы сравнить примеры в галерее.</span></div>
-  </section>
   <section id="catalog" aria-labelledby="catalogTitle">
-    <div class="catalog-head"><div><h2 id="catalogTitle">Приёмы по разделам</h2><p id="resultCount" role="status" aria-live="polite"></p></div>
+    <div class="catalog-head"><div><h1 id="catalogTitle">Приёмы по разделам</h1><p id="resultCount" role="status" aria-live="polite"></p></div>
     <div class="mode-switch" role="group" aria-label="Режим каталога">
       <button type="button" data-mode="all" aria-pressed="true">Все</button>
       <button type="button" data-mode="video" aria-pressed="false">С видео <span id="videoCount"></span></button>
       <button type="button" data-mode="saved" aria-pressed="false">Избранное <span id="savedCount"></span></button>
     </div></div>
-    <div class="filterbar">
-      <label class="search-field"><span class="sr-only">Поиск по приёму, фильму или описанию</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input type="search" id="search" placeholder="Приём, фильм или настроение…" autocomplete="off"><kbd aria-hidden="true">/</kbd></label>
-      <label class="select-field">Пример <select id="source"><option value="all">Любой</option><option value="film">Кино и съёмка</option><option value="ai">ИИ-демонстрация</option></select></label>
-      <label class="select-field">Порядок <select id="sort"><option value="catalog">Порядок гайда</option><option value="name">А–Я в разделе</option><option value="video">Сначала видео</option><option value="gallery">Больше примеров</option></select></label>
-      <button class="text-btn" id="resetFilters" type="button">Сбросить фильтры</button>
-    </div>
     <div class="catalog-sections" id="cards"></div>
     <div class="empty" id="empty" hidden><h3>Ничего не нашлось</h3><p id="emptyText"></p><button class="primary-btn" id="emptyReset" type="button">Показать все приёмы</button></div>
   </section>
@@ -48,7 +37,7 @@
   <button class="link-btn" id="aboutButton" type="button">О подборке и материалах</button>
   <a href="https://github.com/somedayfounder/cinema-guide">GitHub</a>
 </footer>
-<dialog class="tech-dialog" id="detailDialog" aria-labelledby="detailTitle">
+<dialog class="tech-dialog" id="detailDialog" aria-labelledby="detailTitle" aria-modal="false">
   <div class="dialog-toolbar"><button class="text-btn" id="backDetail" type="button" hidden>К предыдущему</button><button class="text-btn save-detail" id="saveDetail" type="button"></button><button class="close-btn" id="closeDetail" type="button" aria-label="Закрыть разбор">×</button></div>
   <div id="detailContent"></div>
 </dialog>
@@ -56,13 +45,13 @@
   <div class="dialog-toolbar"><button class="close-btn" id="closeAbout" type="button" aria-label="Закрыть">×</button></div>
   <div class="about-copy"><p class="eyebrow">О подборке</p><h2 id="aboutTitle">Смотреть и разбирать</h2>
   <p>Здесь собраны 537 приёмов кино, рекламы и телевидения, 373 видео и опубликованные кадры. Видеодемонстрации, созданные с помощью ИИ, отмечены в карточках и плеере.</p>
-  <p>«Кино и съёмка» включает фрагменты фильмов, фотографии и учебные реконструкции. Иногда в одной карточке есть и кинокадр, и ИИ-видео. Переключи тип примера в фильтре, чтобы выбрать нужный.</p>
+  <p>«Кино и съёмка» включает фрагменты фильмов, фотографии и учебные реконструкции. В одной карточке могут быть и кинокадры, и ИИ-видео. Тип материала указан у каждого примера.</p>
   <p>Пояснения к конкретному примеру находятся рядом с источником. Признаки приёмов, пояснения к их действию и сравнения составлены для этого справочника. Блок «На что смотреть» помогает разбирать примеры с учётом раздела. Наблюдаемый результат не всегда позволяет установить технологию съёмки. Фильмы в разделе «Фильмы для дальнейшего разбора» — ориентиры из исходного гайда.</p>
   <p>Права на сторонние материалы принадлежат их авторам. Открытые лицензии и атрибуция указаны у соответствующих примеров. Видеофрагменты сокращены и перекодированы.</p>
-  <p>Наведение запускает видео без звука. На телефоне касание открывает разбор. Внутри можно включить звук и выбрать другой пример. Для просмотра большого кадра нажми на него.</p></div>
+  <p>Наведение запускает видео без звука. Карточка открывает разбор в правой панели. На телефоне панель занимает экран. Внутри можно включить звук и выбрать другой пример. Для просмотра большого кадра нажми на него.</p></div>
 </dialog>
 <dialog class="image-dialog" id="imageDialog" aria-label="Кадр крупнее"><div class="image-toolbar"><button type="button" class="text-btn" id="previousImage" aria-label="Предыдущий кадр">←</button><span id="imagePosition"></span><button type="button" class="text-btn" id="nextImage" aria-label="Следующий кадр">→</button><button class="close-btn" id="closeImage" type="button" aria-label="Закрыть изображение">×</button></div><img id="largeImage" alt=""><p id="imageCaption"></p></dialog>
 <div class="toast" id="toast" role="status" hidden></div>
-<noscript><p class="wrap">Для поиска, видеопримеров и открытия карточек нужен JavaScript.</p></noscript>
+<noscript><p class="wrap">Для видеопримеров и открытия карточек нужен JavaScript.</p></noscript>
 </body>
 </html>
